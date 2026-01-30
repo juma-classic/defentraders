@@ -41,6 +41,10 @@
     },
     {
       "src": "/",
+      "dest": "/public/index.html"
+    },
+    {
+      "src": "/original",
       "dest": "/defentraders.site/index.html"
     },
     {

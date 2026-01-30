@@ -50,7 +50,11 @@ app.get('/api/health', (req, res) => {
 
 // Main routes
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/original', (req, res) => {
+  res.sendFile(path.join(__dirname, 'defentraders.site', 'index.html'));
 });
 
 app.get('/dtrader', (req, res) => {

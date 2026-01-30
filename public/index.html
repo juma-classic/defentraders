@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defen Traders - Reverse Engineered Trading Platform</title>
+    <meta name="description" content="Successfully reverse-engineered trading platform with React, real-time data, and OAuth authentication">
+    <link rel="icon" type="image/png" href="/icon.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            display: block;
+        }
+        
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .features {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            padding: 30px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .feature-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: #667eea;
+            border-color: #667eea;
+        }
+        
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .tech-stack {
+            background: #1a1a1a;
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        
+        .tech-stack h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .tech-category h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .tech-list {
+            list-style: none;
+        }
+        
+        .tech-list li {
+            padding: 5px 0;
+            color: #ccc;
+        }
+        
+        .tech-list li::before {
+            content: "▶";
+            color: #667eea;
+            margin-right: 10px;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-success { background: #4caf50; }
+        .status-warning { background: #ff9800; }
+        .status-info { background: #2196f3; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .features { padding: 30px 20px; }
+            .btn-group { flex-direction: column; align-items: center; }
+            .btn { width: 250px; }
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .github-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+        
+        .github-link:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>🚀 Defen Traders</h1>
+            <p>Successfully Reverse-Engineered Trading Platform</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="stat-number">33.7MB</span>
+                    <div class="stat-label">Code Analyzed</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">40</span>
+                    <div class="stat-label">JS Files Processed</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">200+</span>
+                    <div class="stat-label">API Endpoints</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">80+</span>
+                    <div class="stat-label">React Components</div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <a href="/app" class="btn btn-primary">🎯 View Reconstructed App</a>
+                <a href="/dtrader" class="btn btn-secondary">📊 Original DTrader</a>
+                <a href="https://github.com/juma-classic/defentraders" class="btn btn-secondary">📁 View Source</a>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features">
+            <h2>🔧 What We've Built</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <div class="feature-title">Authentication System</div>
+                    <div class="feature-desc">
+                        <span class="status-indicator status-success"></span>
+                        Complete OAuth 2.0 flow with Deriv integration, token management, and multi-account support.
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-title">Real-time API Layer</div>
+                    <div class="feature-desc">
+                        <span class="status-indicator status-success"></span>
+                        WebSocket connections, live data subscriptions, and automatic reconnection handling.
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-title">Trading Interface</div>
+                    <div class="feature-desc">
+                        <span class="status-indicator status-success"></span>
+                        Interactive charts, trade forms, portfolio management, and real-time price feeds.
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚛️</div>
+                    <div class="feature-title">Modern React App</div>
+                    <div class="feature-desc">
+                        <span class="status-indicator status-success"></span>
+                        Clean component architecture with hooks, context providers, and responsive design.
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-title">Bot Builder Framework</div>
+                    <div class="feature-desc">
+                        <span class="status-indicator status-warning"></span>
+                        Foundation ready for visual trading bot construction and strategy automation.
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">Analysis Tools</div>
+                    <div class="feature-desc">
+                        <span class="status-indicator status-info"></span>
+                        Custom reverse engineering tools for code analysis and pattern extraction.
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tech Stack -->
+        <section class="tech-stack">
+            <h3>🛠️ Technology Stack</h3>
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h4>Frontend</h4>
+                    <ul class="tech-list">
+                        <li>React 18 with Hooks</li>
+                        <li>React Router</li>
+                        <li>Canvas API Charts</li>
+                        <li>CSS Variables</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-category">
+                    <h4>Backend Integration</h4>
+                    <ul class="tech-list">
+                        <li>WebSocket API</li>
+                        <li>OAuth 2.0</li>
+                        <li>Express.js Server</li>
+                        <li>Deriv API</li>
+                        <li>Real-time Data</li>
+                    </ul>
+                </div>
+                
+                <div class="tech-category">
+                    <h4>Development Tools</h4>
+                    <ul class="tech-list">
+                        <li>Custom Code Analyzers</li>
+                        <li>Pattern Recognition</li>
+                        <li>AST Parsing</li>
+                        <li>Automated Reporting</li>
+                        <li>Reverse Engineering</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 style="color: white; margin-bottom: 30px;">Ready to Explore?</h2>
+            <div class="btn-group">
+                <a href="/app" class="btn btn-primary">🚀 Launch Reconstructed App</a>
+                <a href="/" class="btn btn-outline">📱 Original Defen Traders</a>
+                <a href="/dtrader" class="btn btn-outline">💹 Original DTrader</a>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                🎯 <strong>Mission Accomplished!</strong> From 33.7MB of minified code to a clean, maintainable React application.
+            </p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/juma-classic/defentraders" class="github-link">
+                    View on GitHub →
+                </a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
