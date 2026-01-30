@@ -1,0 +1,19 @@
+{
+  "name": "scraped-trading-platform",
+  "version": "1.0.0",
+  "description": "Reverse-engineered trading platform applications",
+  "scripts": {
+    "serve": "http-server . -p 3000 -c-1",
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build": "node build-app.js",
+    "analyze": "node tools/analyzer.js",
+    "extract-auth": "node tools/auth-extractor.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
