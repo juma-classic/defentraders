@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/defentraders.site/static/$1"
+    },
+    {
+      "src": "/icon.png",
+      "dest": "/defentraders.site/icon.png"
+    },
+    {
+      "src": "/dtrader/(.*)",
+      "dest": "/dtrader.defentraders.site/$1"
+    },
+    {
+      "src": "/manual/(.*)",
+      "dest": "/manual-umber.vercel.app/$1"
+    },
+    {
+      "src": "/signals/(.*)",
+      "dest": "/signals-lilac.vercel.app/$1"
+    },
+    {
+      "src": "/app",
+      "dest": "/build/index.html"
+    },
+    {
+      "src": "/app/(.*)",
+      "dest": "/build/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/",
+      "dest": "/defentraders.site/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
+    }
+  ],
+  "functions": {
+    "server.js": {
+      "maxDuration": 30
+    }
+  }
+}

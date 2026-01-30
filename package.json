@@ -2,13 +2,18 @@
   "name": "scraped-trading-platform",
   "version": "1.0.0",
   "description": "Reverse-engineered trading platform applications",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "serve": "http-server . -p 3000 -c-1",
     "start": "node server.js",
     "dev": "node server.js",
     "build": "node build-app.js",
     "analyze": "node tools/analyzer.js",
-    "extract-auth": "node tools/auth-extractor.js"
+    "extract-auth": "node tools/auth-extractor.js",
+    "vercel-build": "npm run build"
   },
   "dependencies": {
     "express": "^4.18.2"
